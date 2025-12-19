@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://6vd8piw1socg"]
+
+[ext_resource type="PackedScene" uid="uid://bc5pakt2gxkt1" path="res://scenes/lane arrow/Lane Arrow.fbx" id="1_0lbwg"]
+
+[node name="Lane Arrow" type="Node3D"]
+
+[node name="Lane Arrow" parent="." instance=ExtResource("1_0lbwg")]

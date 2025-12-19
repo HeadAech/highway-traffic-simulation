@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwagfro2i0vsv"]
+
+[ext_resource type="Script" uid="uid://bln4b4u3sj1sv" path="res://scenes/car/car.gd" id="1_yr3gr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yr3gr"]
+size = Vector3(1, 1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yr3gr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhfra"]
+
+[node name="Car" type="PathFollow3D" node_paths=PackedStringArray("area3d", "carBody")]
+progress = 13.878517
+rotation_mode = 0
+script = ExtResource("1_yr3gr")
+area3d = NodePath("Area3D")
+carBody = NodePath("MeshInstance3D")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.5)
+shape = SubResource("BoxShape3D_yr3gr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_yr3gr")
+surface_material_override/0 = SubResource("StandardMaterial3D_yhfra")

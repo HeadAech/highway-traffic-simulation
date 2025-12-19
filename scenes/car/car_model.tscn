@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2vthpco38yiq"]
+
+[ext_resource type="ArrayMesh" uid="uid://4t3g2nbd2ip" path="res://scenes/car/model/Plane_001.res" id="1_v6jud"]
+[ext_resource type="ArrayMesh" uid="uid://b7y3t6sah55g7" path="res://scenes/car/model/Cube_003.res" id="2_lsmho"]
+[ext_resource type="ArrayMesh" uid="uid://x6xc557v7eu1" path="res://scenes/car/model/Cylinder_001.res" id="3_d5p3p"]
+[ext_resource type="ArrayMesh" uid="uid://c4r3nd3w5y6jw" path="res://scenes/car/model/Plane_002.res" id="4_jrbp1"]
+[ext_resource type="ArrayMesh" uid="uid://bpinoghxhakxq" path="res://scenes/car/model/Cylinder_002.res" id="5_ew5i8"]
+[ext_resource type="ArrayMesh" uid="uid://diofv602dpalp" path="res://scenes/car/model/Cube_004.res" id="6_tfrv0"]
+[ext_resource type="ArrayMesh" uid="uid://xptyusdxw6dg" path="res://scenes/car/model/Cube.res" id="7_hullq"]
+
+[node name="Car Model" type="Node3D"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(7.785874e-06, 1.7479146e-06, 39.987606, 7.1032264e-14, 39.98761, -1.7479143e-06, -39.987606, 4.1136381e-13, 7.785874e-06, 0.44355667, 0.021967225, -0.029897645)
+mesh = ExtResource("1_v6jud")
+skeleton = NodePath("")
+
+[node name="Front Indicator" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.952947, -0.42458698, -6.75223e-09, 0, -6.53259e-08, 0.5437218, -1.1713095, -1.4329004, -2.2787493e-08, 0.25686455, 0.021967225, -0.7223389)
+mesh = ExtResource("2_lsmho")
+skeleton = NodePath("")
+
+[node name="Front Wheels" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.7253064e-13, -3.9470406e-06, 19.658752, -24.226765, -1.0589855e-06, 0, 1.0589855e-06, -24.226765, -3.2028174e-06, 0.6720894, -0.06518877, -0.49660057)
+mesh = ExtResource("3_d5p3p")
+skeleton = NodePath("")
+
+[node name="Rear Stop Light" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.928479e-07, -3.516848, -5.3102934e-07, -2.4112833, -5.729673e-07, -9.495547e-14, 5.7866513e-15, 5.310293e-07, -3.5168483, 0.31281775, 0.11066532, 0.7358416)
+mesh = ExtResource("4_jrbp1")
+skeleton = NodePath("")
+
+[node name="Rear Wheels" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.7253064e-13, -3.9470406e-06, 19.658752, -24.226765, -1.0589855e-06, 0, 1.0589855e-06, -24.226765, -3.2028174e-06, 0.6720893, -0.06518877, 0.49270648)
+mesh = ExtResource("5_ew5i8")
+skeleton = NodePath("")
+
+[node name="Side Indicator" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.80499023, 0.03269478, -4.615764e-10, 0, 7.254015e-08, 0.5359872, -0.015862422, -1.6592032, 2.3424198e-08, 0.17365153, 0.053775657, -0.25040987)
+mesh = ExtResource("6_tfrv0")
+skeleton = NodePath("")
+
+[node name="Top Stop Light" type="MeshInstance3D" parent="."]
+transform = Transform3D(8.403943, -2.576524e-07, 7.249058e-15, 0, 1.288262e-07, 1.8969784, 7.34696e-07, 2.9472, -8.2919556e-08, 0.44355667, 0.24093342, 0.38156807)
+mesh = ExtResource("7_hullq")
+skeleton = NodePath("")

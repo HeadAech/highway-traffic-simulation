@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpb3nxt5wnw01"]
+
+[ext_resource type="ArrayMesh" uid="uid://c0r6mqek2mocs" path="res://scenes/guard rail/model/Cube_001.res" id="1_go7rw"]
+[ext_resource type="Material" uid="uid://ll62jy3hkhc1" path="res://materials/metal.tres" id="2_2b6lx"]
+[ext_resource type="ArrayMesh" uid="uid://kjrwjrn6n50" path="res://scenes/guard rail/model/Cylinder.res" id="7_t5xvh"]
+[ext_resource type="ArrayMesh" uid="uid://dehje7ydfvi5c" path="res://scenes/guard rail/model/Cylinder_002.res" id="8_dkkg5"]
+
+[node name="GuardRail" type="Node3D"]
+
+[node name="Guard Rail" type="Node3D" parent="."]
+transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, 0, 0, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="Guard Rail"]
+transform = Transform3D(100, 0, 0, 0, -7.892221e-05, 74.13814, 0, -662.0474, -8.837956e-06, -0.6131026, 1.7853942, 0)
+mesh = ExtResource("1_go7rw")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_2b6lx")
+
+[node name="Cylinder" type="MeshInstance3D" parent="Guard Rail"]
+transform = Transform3D(100, 1.4210855e-12, 1.8145744e-05, 8.742278e-06, -1.7881393e-05, -207.5631, 0, -99.99999, 2.4743451e-05, 0, 1.3673904, 0)
+mesh = ExtResource("7_t5xvh")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_2b6lx")
+
+[node name="Cylinder_001" type="MeshInstance3D" parent="Guard Rail"]
+transform = Transform3D(100, 1.4210855e-12, 1.8145744e-05, 8.742278e-06, -1.7881393e-05, -207.5631, 0, -99.99999, 2.4743451e-05, 0, 1.3673904, -4.385045)
+mesh = ExtResource("8_dkkg5")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_2b6lx")

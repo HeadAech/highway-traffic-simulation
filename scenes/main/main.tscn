@@ -1,0 +1,1516 @@
+[gd_scene load_steps=30 format=3 uid="uid://bq1i4sdvcs3tr"]
+
+[ext_resource type="PackedScene" uid="uid://dcyqqn6ge58rr" path="res://scenes/Controls/controls.tscn" id="1_6q06x"]
+[ext_resource type="Material" uid="uid://elf0717kiy58" path="res://materials/asphalt.tres" id="1_hyk8p"]
+[ext_resource type="Script" uid="uid://cq3wpk4o646pu" path="res://scenes/main/car_manager.gd" id="1_l3cfh"]
+[ext_resource type="Script" uid="uid://notjcqewou1l" path="res://scenes/main/camera_script.gd" id="2_hujxm"]
+[ext_resource type="PackedScene" uid="uid://cwagfro2i0vsv" path="res://scenes/car/car.tscn" id="3_k2fmo"]
+[ext_resource type="Script" uid="uid://b3kgbuyt3x4oh" path="res://scenes/main/road_monitor.gd" id="3_yyfjg"]
+[ext_resource type="PackedScene" uid="uid://bag82paaeam8n" path="res://scenes/table/table_value.tscn" id="4_b1x3f"]
+[ext_resource type="PackedScene" uid="uid://6vd8piw1socg" path="res://scenes/lane arrow/lane_arrow.tscn" id="5_6q06x"]
+[ext_resource type="Script" uid="uid://d2mjfcrmd5rwb" path="res://scenes/main/braking_point.gd" id="8_a8run"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_iuonh"]
+
+[sub_resource type="Sky" id="Sky_k2fmo"]
+sky_material = SubResource("PhysicalSkyMaterial_iuonh")
+
+[sub_resource type="Environment" id="Environment_l3cfh"]
+background_mode = 2
+sky = SubResource("Sky_k2fmo")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_b1x3f"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 4.0
+color = Color(0.5, 0.5, 0.5, 1)
+grow_begin = -29.0
+vertical = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ouso4"]
+material = ExtResource("1_hyk8p")
+size = Vector3(12, 0.2, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hyk8p"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iuonh"]
+material = SubResource("StandardMaterial3D_hyk8p")
+size = Vector2(0.12, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_th5th"]
+size = Vector3(11.031895, 13.035, 165)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7smn1"]
+size = Vector3(11.031895, 13.035, 165)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_raeie"]
+size = Vector3(11.031895, 13.035, 165)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6q06x"]
+material = ExtResource("1_hyk8p")
+size = Vector3(3, 0.2, 250)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hyk8p"]
+material = SubResource("StandardMaterial3D_hyk8p")
+size = Vector2(0.12, 6)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_k2fmo"]
+material = SubResource("StandardMaterial3D_hyk8p")
+size = Vector2(0.12, 2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6q06x"]
+material = SubResource("StandardMaterial3D_hyk8p")
+size = Vector2(0.12, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hujxm"]
+size = Vector3(10.889526, 7.9521484, 42.714355)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yyfjg"]
+size = Vector3(10.917236, 8.191406, 42.714355)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b1x3f"]
+size = Vector3(11.416748, 7.9521484, 42.714355)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ouso4"]
+size = Vector3(8.835999, 9.854767, 36.46982)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a8run"]
+size = Vector3(39, 10.300659, 26.108643)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_blune"]
+size = Vector3(10.143066, 9.756958, 91.3215)
+
+[node name="Main" type="Node3D"]
+
+[node name="Controls" parent="." instance=ExtResource("1_6q06x")]
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9928139, 0.03556063, -0.11426334, 0.119669005, -0.29502282, 0.9479667, 0, -0.95482826, -0.29715824, 0, 11.963695, 362.4229)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_l3cfh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0.3502074, -0.9366722, 0, 0.9366722, 0.3502074, 1, 1.5308052e-08, -4.094324e-08, 0, 0, 0)
+far = 10000.0
+script = ExtResource("2_hujxm")
+
+[node name="RoadMonitor" type="Node" parent="." node_paths=PackedStringArray("main_road")]
+unique_name_in_owner = true
+script = ExtResource("3_yyfjg")
+main_road = NodePath("../Highway/Main Road")
+
+[node name="Timer" type="Timer" parent="RoadMonitor"]
+
+[node name="Update Table" type="Timer" parent="RoadMonitor"]
+autostart = true
+
+[node name="Control" type="Control" parent="RoadMonitor"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="RoadMonitor/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -215.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Monitor" type="FoldableContainer" parent="RoadMonitor/Control/MarginContainer"]
+layout_mode = 2
+mouse_filter = 1
+folded = true
+title = "Monitor"
+title_position = 1
+
+[node name="TabContainer" type="TabContainer" parent="RoadMonitor/Control/MarginContainer/Monitor"]
+visible = false
+layout_mode = 2
+mouse_filter = 0
+current_tab = 0
+
+[node name="Flow" type="VBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Lanes" type="VBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Filler" type="Label" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/Lanes"]
+layout_mode = 2
+text = "Sec #"
+
+[node name="Lane 1" type="Label" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/Lanes"]
+layout_mode = 2
+text = "Lane 1"
+
+[node name="Lane 2" type="Label" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/Lanes"]
+layout_mode = 2
+text = "Lane 2"
+
+[node name="Lane 3" type="Label" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/Lanes"]
+layout_mode = 2
+text = "Lane 3"
+
+[node name="VSeparator" type="VSeparator" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_b1x3f")
+
+[node name="VBoxContainer" type="ScrollContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_scroll_mode = 0
+
+[node name="Values" type="VBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Sector Numbers" type="HBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Table Value" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Sector Numbers" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value2" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Sector Numbers" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value3" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Sector Numbers" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Lane 1 Values" type="HBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Table Value" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 1 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value2" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 1 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value3" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 1 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Lane 2 Values" type="HBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Table Value" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 2 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value2" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 2 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value3" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 2 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Lane 3 Values" type="HBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Table Value" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 3 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value2" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 3 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value3" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Flow/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 3 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Density" type="VBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Lanes" type="VBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Filler" type="Label" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/Lanes"]
+layout_mode = 2
+text = "Sec #"
+
+[node name="Lane 1" type="Label" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/Lanes"]
+layout_mode = 2
+text = "Lane 1"
+
+[node name="Lane 2" type="Label" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/Lanes"]
+layout_mode = 2
+text = "Lane 2"
+
+[node name="Lane 3" type="Label" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/Lanes"]
+layout_mode = 2
+text = "Lane 3"
+
+[node name="VSeparator" type="VSeparator" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_b1x3f")
+
+[node name="VBoxContainer" type="ScrollContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_scroll_mode = 0
+
+[node name="Values" type="VBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Sector Numbers" type="HBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Table Value" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Sector Numbers" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value2" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Sector Numbers" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value3" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Sector Numbers" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Lane 1 Values" type="HBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Table Value" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 1 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value2" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 1 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value3" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 1 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Lane 2 Values" type="HBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Table Value" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 2 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value2" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 2 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value3" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 2 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Lane 3 Values" type="HBoxContainer" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Table Value" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 3 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value2" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 3 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Table Value3" parent="RoadMonitor/Control/MarginContainer/Monitor/TabContainer/Density/MarginContainer/HBoxContainer/VBoxContainer/Values/Lane 3 Values" instance=ExtResource("4_b1x3f")]
+layout_mode = 2
+
+[node name="Highway" type="Node3D" parent="."]
+
+[node name="Main Road" type="Node3D" parent="Highway" node_paths=PackedStringArray("lane1_node", "lane2_node", "lane3_node", "lane4_node")]
+script = ExtResource("1_l3cfh")
+car_scene = ExtResource("3_k2fmo")
+lane1_node = NodePath("Lane 1")
+lane2_node = NodePath("Lane 2")
+lane3_node = NodePath("Lane 3")
+lane4_node = NodePath("Lane 4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Highway/Main Road"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 4.266103, 1.3378305, 0, 499)
+mesh = SubResource("BoxMesh_ouso4")
+
+[node name="Strips" type="Node3D" parent="Highway/Main Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0)
+
+[node name="row" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 23)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row2" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row2"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row2"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row3" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row3"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row3"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row4" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row4"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row4"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row5" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row5"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row5"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row6" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row6"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row6"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row7" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -37)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row7"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row7"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row8" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -47)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row8"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row8"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row9" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -57)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row9"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row9"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row10" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -67)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row10"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row10"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row11" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -77)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row11"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row11"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row12" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -87.04381)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row12"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row12"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row13" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -97.04381)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 250)
+
+[node name="row2" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 240)
+
+[node name="row3" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 230)
+
+[node name="row4" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 220)
+
+[node name="row5" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 210)
+
+[node name="row6" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 200)
+
+[node name="row7" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 190)
+
+[node name="row8" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 180)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row8"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row8"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row9" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 170)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row9"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row9"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row10" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 160)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row10"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row10"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row11" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 150)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row11"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row11"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row12" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 139.95619)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row12"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.42288)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row12"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.42288)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row13" type="Node3D" parent="Highway/Main Road/Strips/row13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 129.95619)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row13"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.42288)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row13/row13"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.42288)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row14" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -107.04381)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row14"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row14"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row15" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -117.04381)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row15"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row15"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row16" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -127.04381)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row16"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row16"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row17" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -137.04381)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row17"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row17"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0.6164627, 362.4229)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row18" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -147.0438)
+
+[node name="row19" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -157.0438)
+
+[node name="row20" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -167.0438)
+
+[node name="row21" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -177.0438)
+
+[node name="row22" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -187.0438)
+
+[node name="row23" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -197)
+
+[node name="row24" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -207)
+
+[node name="row25" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -217)
+
+[node name="row26" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -227)
+
+[node name="row27" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -237)
+
+[node name="row28" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -247)
+
+[node name="row29" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -257)
+
+[node name="row30" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -267)
+
+[node name="row31" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -277)
+
+[node name="row32" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -287)
+
+[node name="row33" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -297)
+
+[node name="row34" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -307.04382)
+
+[node name="row35" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -317.04382)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row35"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row35"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row36" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -327.04382)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row36"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row36"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row37" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -337.04382)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row37"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row37"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row38" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -347.04382)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row38"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row38"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row39" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -357.04382)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row39"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row39"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row40" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -367.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row40"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row40"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row41" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -377.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row41"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row41"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row42" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -387.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row42"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row42"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row43" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -397.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row43"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row43"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row45" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -417.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row45"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row45"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row46" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -427.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row46"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row46"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row47" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -437.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row47"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row47"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row48" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -447.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row48"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row48"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row49" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -457.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row49"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row49"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row50" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -467.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row50"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row50"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row51" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -477.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row51"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row51"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row52" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -487.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row52"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row52"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row53" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -497.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row53"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row53"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row54" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -507.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row54"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row54"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row55" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -517.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row55"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row55"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row56" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -527.0876)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row56"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row56"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../../row44")
+
+[node name="row44" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -407.0438)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Main Road/Strips/row44"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, -4.2656984, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Main Road/Strips/row44"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 1, 7.3438244, 0, 526)
+mesh = SubResource("PlaneMesh_iuonh")
+skeleton = NodePath("../..")
+
+[node name="row57" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 333)
+
+[node name="row58" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 323)
+
+[node name="row59" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 313)
+
+[node name="row60" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 303)
+
+[node name="row61" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 293)
+
+[node name="row62" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 283)
+
+[node name="row63" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 273)
+
+[node name="row64" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 263)
+
+[node name="row65" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 253)
+
+[node name="row66" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 243)
+
+[node name="row67" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 233)
+
+[node name="row68" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 222.95619)
+
+[node name="row69" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 212.95619)
+
+[node name="row75" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 462.95618)
+
+[node name="row76" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 452.95618)
+
+[node name="row77" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 442.95618)
+
+[node name="row78" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 432.95618)
+
+[node name="row79" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 422.95618)
+
+[node name="row80" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 412.95618)
+
+[node name="row81" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 402.95618)
+
+[node name="row82" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 392.95618)
+
+[node name="row83" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 382.95618)
+
+[node name="row84" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 372.95618)
+
+[node name="row85" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 362.95618)
+
+[node name="row86" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 352.91238)
+
+[node name="row87" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 342.91238)
+
+[node name="row70" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 202.95619)
+
+[node name="row71" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 192.95619)
+
+[node name="row72" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 182.95619)
+
+[node name="row73" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 172.95619)
+
+[node name="row74" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 162.9562)
+
+[node name="row88" type="Node3D" parent="Highway/Main Road/Strips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 472.95618)
+
+[node name="Lane 1" type="Node3D" parent="Highway/Main Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 0.1, 2)
+
+[node name="BrakingPoint1" type="Area3D" parent="Highway/Main Road/Lane 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1999998, -0.1, 374.15918)
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("8_a8run")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Highway/Main Road/Lane 1/BrakingPoint1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6365528, 5.6164627, -93.78958)
+shape = SubResource("BoxShape3D_th5th")
+
+[node name="Timer" type="Timer" parent="Highway/Main Road/Lane 1"]
+
+[node name="Lane 2" type="Node3D" parent="Highway/Main Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.183465, 0, 2)
+
+[node name="BrakingPoint2" type="Area3D" parent="Highway/Main Road/Lane 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1999998, -0.1, 374.15918)
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("8_a8run")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Highway/Main Road/Lane 2/BrakingPoint2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6164627, -93.78958)
+shape = SubResource("BoxShape3D_7smn1")
+
+[node name="Timer" type="Timer" parent="Highway/Main Road/Lane 2"]
+
+[node name="Lane 3" type="Node3D" parent="Highway/Main Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.7, 0, 2)
+
+[node name="BrakingPoint3" type="Area3D" parent="Highway/Main Road/Lane 3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1999998, -0.1, 374.15918)
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("8_a8run")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Highway/Main Road/Lane 3/BrakingPoint3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6164627, -93.78958)
+shape = SubResource("BoxShape3D_raeie")
+
+[node name="Timer" type="Timer" parent="Highway/Main Road/Lane 3"]
+
+[node name="Lane 4" type="Node3D" parent="Highway/Main Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5, 0, 130.835)
+
+[node name="Timer" type="Timer" parent="Highway/Main Road/Lane 4"]
+
+[node name="Runway" type="Node3D" parent="Highway"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.002, -0.61, -53.591)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Highway/Runway"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 21.876152, 0.6264627, -298.77673)
+mesh = SubResource("BoxMesh_6q06x")
+
+[node name="Strips" type="Node3D" parent="Highway/Runway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.625, 0.12, 17)
+
+[node name="Strip" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 15.5922985, 10.446373, 0.6164627, -238.45938)
+mesh = SubResource("PlaneMesh_hyk8p")
+skeleton = NodePath("../..")
+
+[node name="Strip2" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446398, 0.6164627, -363.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip3" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.4464, 0.6164627, -367.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip4" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.4464, 0.6164627, -371.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip5" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.4464, 0.6164627, -375.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip6" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.4464, 0.6164627, -379.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip7" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.4464035, 0.6164627, -383.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip8" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446402, 0.6164627, -387.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip9" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446402, 0.6164627, -391.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip10" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446402, 0.6164627, -395.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip11" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446405, 0.6164627, -399.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip12" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446409, 0.6164627, -403.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip13" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446405, 0.6164627, -407.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Axis Strip13" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(1.6870201, 0, 1.6870198, 0, 1, 0, -1.6870201, 0, 1.6870198, 18.911146, 0.61646366, -402.83026)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Axis Strip14" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(1.6870201, 0, 1.6870198, 0, 1, 0, -1.6870201, 0, 1.6870198, 15.540701, 0.61646366, -406.20166)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Axis Strip16" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(1.6870201, 0, 1.6870198, 0, 1, 0, -1.6870201, 0, 1.6870198, 12.183796, 0.67749166, -409.58527)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="End Strip15" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958724, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 10.446407, 0.6164627, -410.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="LONG STRIP" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958724, 0, 0, 0, 1, 0, 0, 0, 0.7629057, 10.446411, 0.6164627, -424.68365)
+mesh = SubResource("PlaneMesh_6q06x")
+skeleton = NodePath("../..")
+
+[node name="Strip14" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 15.5922985, 10.446358, 0.6164627, -238.43921)
+mesh = SubResource("PlaneMesh_hyk8p")
+skeleton = NodePath("../..")
+
+[node name="Strip15" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.44639, 0.6164627, -315.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip16" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.44639, 0.6164627, -319.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip17" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446392, 0.6164627, -323.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip18" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446392, 0.6164627, -327.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip19" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446392, 0.6164627, -331.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip20" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446392, 0.6164627, -335.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip21" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446396, 0.6164627, -339.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip22" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446394, 0.6164627, -343.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip23" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446394, 0.6164627, -347.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip24" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446394, 0.6164627, -351.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip25" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446398, 0.6164627, -355.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip26" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446398, 0.6164627, -359.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip32" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446384, 0.6164627, -287.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip33" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446384, 0.6164627, -291.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip34" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446388, 0.6164627, -295.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip35" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446388, 0.6164627, -299.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip36" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446386, 0.6164627, -303.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip37" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.446386, 0.6164627, -307.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip38" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.44639, 0.6164627, -311.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Strip39" type="MeshInstance3D" parent="Highway/Runway/Strips"]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 10.44639, 0.6164627, -315.4229)
+mesh = SubResource("PlaneMesh_k2fmo")
+skeleton = NodePath("../..")
+
+[node name="Lane Arrows" type="Node3D" parent="Highway/Runway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, 0)
+
+[node name="Lane Arrow" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747396, 0.73946273, -356.4229)
+
+[node name="Lane Arrow2" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747391, 0.73946273, -363.4229)
+
+[node name="Lane Arrow3" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747398, 0.73946273, -370.4229)
+
+[node name="Lane Arrow4" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747402, 0.73946273, -377.4229)
+
+[node name="Lane Arrow5" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747398, 0.73946273, -384.4229)
+
+[node name="Lane Arrow6" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747383, 0.73946273, -321.4229)
+
+[node name="Lane Arrow7" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747391, 0.73946273, -328.4229)
+
+[node name="Lane Arrow8" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747393, 0.73946273, -335.4229)
+
+[node name="Lane Arrow9" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747387, 0.73946273, -342.4229)
+
+[node name="Lane Arrow10" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747395, 0.73946273, -349.4229)
+
+[node name="Lane Arrow11" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747381, 0.73946273, -286.4229)
+
+[node name="Lane Arrow12" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747383, 0.73946273, -293.4229)
+
+[node name="Lane Arrow13" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747383, 0.73946273, -300.4229)
+
+[node name="Lane Arrow14" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747385, 0.73946273, -307.4229)
+
+[node name="Lane Arrow15" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747387, 0.73946273, -314.4229)
+
+[node name="Lane Arrow19" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747379, 0.73946273, -272.4229)
+
+[node name="Lane Arrow20" parent="Highway/Runway/Lane Arrows" instance=ExtResource("5_6q06x")]
+transform = Transform3D(3.0958726, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 13.747379, 0.73946273, -279.4229)
+
+[node name="Guard Rails" type="Node3D" parent="Highway"]
+
+[node name="Back" type="Node" parent="Highway/Guard Rails"]
+
+[node name="Front" type="Node" parent="Highway/Guard Rails"]
+
+[node name="Boundaries" type="Node3D" parent="Highway"]
+
+[node name="Start Boundaries" type="Node3D" parent="Highway/Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -527.15125)
+visible = false
+
+[node name="Lane1" type="Area3D" parent="Highway/Boundaries/Start Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 0, 15)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Highway/Boundaries/Start Boundaries/Lane1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7904663, 3, 526)
+shape = SubResource("BoxShape3D_hujxm")
+
+[node name="Lane2" type="Area3D" parent="Highway/Boundaries/Start Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8000002, 0, 15)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Highway/Boundaries/Start Boundaries/Lane2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.068481445, 3.119629, 526)
+shape = SubResource("BoxShape3D_yyfjg")
+
+[node name="Lane3" type="Area3D" parent="Highway/Boundaries/Start Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2, 0, 15)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Highway/Boundaries/Start Boundaries/Lane3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23400879, 3.4760742, 525.1428)
+shape = SubResource("BoxShape3D_b1x3f")
+
+[node name="Lane4Enter" type="Area3D" parent="Highway/Boundaries/Start Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, -240.29999)
+top_level = true
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Highway/Boundaries/Start Boundaries/Lane4Enter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25967407, 5.043846, 380.15784)
+shape = SubResource("BoxShape3D_ouso4")
+
+[node name="End Boundaries" type="Node3D" parent="Highway/Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 472.76202)
+
+[node name="End" type="Area3D" parent="Highway/Boundaries/End Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -86.400024)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Highway/Boundaries/End Boundaries/End"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2529297, 4.6503296, 44.917603)
+shape = SubResource("BoxShape3D_a8run")
+
+[node name="MergeEnd" parent="Highway/Boundaries/End Boundaries" instance=ExtResource("3_k2fmo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.905163, -1.628999, -142.28409)
+visible = false
+collision_mask = 3
+is_frozen = true
+
+[node name="Car Model" parent="Highway/Boundaries/End Boundaries/MergeEnd" index="2"]
+visible = false
+
+[node name="MergeDissalowArea" type="Area3D" parent="Highway/Boundaries/End Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -187.46765)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Highway/Boundaries/End Boundaries/MergeDissalowArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0974121, 4.9949417, -118.41632)
+shape = SubResource("BoxShape3D_blune")
+
+[connection signal="timeout" from="RoadMonitor/Timer" to="RoadMonitor" method="_on_timer_timeout"]
+[connection signal="timeout" from="RoadMonitor/Update Table" to="RoadMonitor" method="_on_update_table_timeout"]
+[connection signal="body_entered" from="Highway/Main Road/Lane 1/BrakingPoint1" to="Highway/Main Road/Lane 1/BrakingPoint1" method="_on_body_entered"]
+[connection signal="body_entered" from="Highway/Main Road/Lane 2/BrakingPoint2" to="Highway/Main Road/Lane 2/BrakingPoint2" method="_on_body_entered"]
+[connection signal="body_entered" from="Highway/Main Road/Lane 3/BrakingPoint3" to="Highway/Main Road/Lane 3/BrakingPoint3" method="_on_body_entered"]
+[connection signal="body_entered" from="Highway/Boundaries/Start Boundaries/Lane1" to="Highway/Main Road" method="_on_lane_1_body_entered"]
+[connection signal="body_exited" from="Highway/Boundaries/Start Boundaries/Lane1" to="Highway/Main Road" method="_on_lane_1_body_exited"]
+[connection signal="body_entered" from="Highway/Boundaries/Start Boundaries/Lane2" to="Highway/Main Road" method="_on_lane_2_body_entered"]
+[connection signal="body_exited" from="Highway/Boundaries/Start Boundaries/Lane2" to="Highway/Main Road" method="_on_lane_2_body_exited"]
+[connection signal="body_entered" from="Highway/Boundaries/Start Boundaries/Lane3" to="Highway/Main Road" method="_on_lane_3_body_entered"]
+[connection signal="body_exited" from="Highway/Boundaries/Start Boundaries/Lane3" to="Highway/Main Road" method="_on_lane_3_body_exited"]
+[connection signal="body_entered" from="Highway/Boundaries/Start Boundaries/Lane4Enter" to="Highway/Main Road" method="_on_lane_4_enter_body_entered"]
+[connection signal="body_exited" from="Highway/Boundaries/Start Boundaries/Lane4Enter" to="Highway/Main Road" method="_on_lane_4_enter_body_exited"]
+[connection signal="body_entered" from="Highway/Boundaries/End Boundaries/End" to="Highway/Main Road" method="_on_end_body_entered"]
+[connection signal="body_exited" from="Highway/Boundaries/End Boundaries/MergeDissalowArea" to="Highway/Main Road" method="_on_merge_dissalow_area_body_exited"]
+
+[editable path="Highway/Boundaries/End Boundaries/MergeEnd"]
+[editable path="Highway/Boundaries/End Boundaries/MergeEnd/Car Model"]

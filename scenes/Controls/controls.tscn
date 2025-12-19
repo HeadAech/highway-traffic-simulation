@@ -1,0 +1,452 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcyqqn6ge58rr"]
+
+[ext_resource type="Script" uid="uid://b4qtu2b8epr34" path="res://scenes/Controls/controls.gd" id="1_qd5cp"]
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_qd5cp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 340.0
+offset_bottom = 185.0
+theme_override_constants/separation = 20
+
+[node name="Section Camera" type="FoldableContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 0
+title = "Camera"
+
+[node name="Margin Container" type="MarginContainer" parent="HBoxContainer/Section Camera"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Section Camera/Margin Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="Camera Preset" type="VBoxContainer" parent="HBoxContainer/Section Camera/Margin Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HBoxContainer/Section Camera/Margin Container/VBoxContainer/Camera Preset"]
+layout_mode = 2
+text = "Camera Preset"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section Camera/Margin Container/VBoxContainer/Camera Preset"]
+layout_mode = 2
+alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/Section Camera/Margin Container/VBoxContainer/Camera Preset/HBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Side View"
+popup/item_0/id = 0
+popup/item_1/text = "With Traffic"
+popup/item_1/id = 1
+popup/item_2/text = "Counter Traffic"
+popup/item_2/id = 2
+popup/item_3/text = "Top View"
+popup/item_3/id = 3
+
+[node name="Section 1" type="FoldableContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 0
+folded = true
+title = "Droga"
+
+[node name="Margin Container" type="MarginContainer" parent="HBoxContainer/Section 1"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Section 1/Margin Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="Drivers On Road" type="VBoxContainer" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Maksymalna liczba kierowców na drodze."
+
+[node name="Title" type="Label" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer/Drivers On Road"]
+layout_mode = 2
+text = "Drivers on road"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer/Drivers On Road"]
+layout_mode = 2
+alignment = 1
+
+[node name="Drivers Amount" type="HSlider" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer/Drivers On Road/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 400.0
+value = 6.0
+
+[node name="Value" type="Label" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer/Drivers On Road/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "18"
+horizontal_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Spawn Delay" type="VBoxContainer" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer/Spawn Delay"]
+layout_mode = 2
+text = "Spawn Delay"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer/Spawn Delay"]
+layout_mode = 2
+alignment = 1
+
+[node name="Spawn Delay Time" type="HSlider" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer/Spawn Delay/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 10.0
+step = 0.1
+value = 2.0
+
+[node name="Value" type="Label" parent="HBoxContainer/Section 1/Margin Container/VBoxContainer/Spawn Delay/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "4.0"
+horizontal_alignment = 2
+
+[node name="Section 2" type="FoldableContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 0
+folded = true
+title = "Samochody"
+
+[node name="Margin Container" type="MarginContainer" parent="HBoxContainer/Section 2"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Section 2/Margin Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="Base Velocity" type="VBoxContainer" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Maksymalna prędkość aut na drodze."
+
+[node name="Title" type="Label" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Velocity"]
+layout_mode = 2
+text = "Max Velocity"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Velocity"]
+layout_mode = 2
+alignment = 1
+
+[node name="Base Velocity" type="HSlider" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Velocity/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 7.5
+max_value = 200.0
+value = 10.5
+
+[node name="Value" type="Label" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Velocity/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "33.33"
+horizontal_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Base Acceleration" type="VBoxContainer" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Maksymalna wartość przyśpieszenia aut."
+
+[node name="Title" type="Label" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Acceleration"]
+layout_mode = 2
+text = "Max Acceleration"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Acceleration"]
+layout_mode = 2
+alignment = 1
+
+[node name="Base Acceleration" type="HSlider" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Acceleration/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 7.5
+max_value = 60.0
+step = 0.1
+value = 7.5
+
+[node name="Value" type="Label" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Acceleration/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "7.5"
+horizontal_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Base Deacceleration" type="VBoxContainer" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Maksymalna wartość hamowania aut."
+
+[node name="Title" type="Label" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Deacceleration"]
+layout_mode = 2
+text = "Max Deacceleration"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Deacceleration"]
+layout_mode = 2
+alignment = 1
+
+[node name="Base Deacceleration" type="HSlider" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Deacceleration/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 7.5
+max_value = 60.0
+step = 0.1
+value = 7.5
+
+[node name="Value" type="Label" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Deacceleration/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "7.5"
+horizontal_alignment = 2
+
+[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Random Threshold" type="VBoxContainer" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Próg decydujący o zahamowaniu auta."
+
+[node name="Title" type="Label" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Random Threshold"]
+layout_mode = 2
+text = "Random Threshold Factor"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Random Threshold"]
+layout_mode = 2
+alignment = 1
+
+[node name="Random Threshold Factor" type="HSlider" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Random Threshold/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 0.7
+
+[node name="Value" type="Label" parent="HBoxContainer/Section 2/Margin Container/VBoxContainer/Random Threshold/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "0.7"
+horizontal_alignment = 2
+
+[node name="Section 4" type="FoldableContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+folded = true
+title = "Włączenie do ruchu"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Section 4"]
+visible = false
+layout_mode = 2
+
+[node name="Margin Container" type="MarginContainer" parent="HBoxContainer/Section 4/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="Politeness Factor" type="VBoxContainer" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Współczynnik uprzejmości TA (Trailing Actor) - odpowiada za decyzję o wpuszczenia auta z pasa rozbiegowego."
+
+[node name="Title" type="Label" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Politeness Factor"]
+layout_mode = 2
+text = "Politeness Factor"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Politeness Factor"]
+layout_mode = 2
+alignment = 1
+
+[node name="Politeness Factor" type="HSlider" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Politeness Factor/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Value" type="Label" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Politeness Factor/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "0.5"
+horizontal_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Decision Threshold" type="VBoxContainer" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Próg decydujący o rozpoczęciu manewru włączania się do ruchu."
+
+[node name="Title" type="Label" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Decision Threshold"]
+layout_mode = 2
+text = "Decision Threshold"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Decision Threshold"]
+layout_mode = 2
+alignment = 1
+
+[node name="Decision Threshold" type="HSlider" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Decision Threshold/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Value" type="Label" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Decision Threshold/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "0.5"
+horizontal_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Desired Gap" type="VBoxContainer" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Optymalna odległość między autami."
+
+[node name="Title" type="Label" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Desired Gap"]
+layout_mode = 2
+text = "Desired Gap"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Desired Gap"]
+layout_mode = 2
+alignment = 1
+
+[node name="Desired Gap" type="HSlider" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Desired Gap/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 7.5
+value = 30.5
+
+[node name="Value" type="Label" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Desired Gap/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "30.0"
+horizontal_alignment = 2
+
+[node name="HSeparator4" type="HSeparator" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Minimum Gap" type="VBoxContainer" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Minimalna odległość między autami."
+
+[node name="Title" type="Label" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Minimum Gap"]
+layout_mode = 2
+text = "Minimum Gap"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Minimum Gap"]
+layout_mode = 2
+alignment = 1
+
+[node name="Minimum Gap" type="HSlider" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Minimum Gap/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 7.5
+value = 7.5
+
+[node name="Value" type="Label" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Minimum Gap/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "7.5"
+horizontal_alignment = 2
+
+[node name="HSeparator5" type="HSeparator" parent="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="FoldableContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+title = "Symulacja"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Zresetuj Symulacje"
+
+[connection signal="item_selected" from="HBoxContainer/Section Camera/Margin Container/VBoxContainer/Camera Preset/HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="drag_ended" from="HBoxContainer/Section 1/Margin Container/VBoxContainer/Drivers On Road/HBoxContainer/Drivers Amount" to="." method="_on_drivers_amount_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/Section 1/Margin Container/VBoxContainer/Drivers On Road/HBoxContainer/Drivers Amount" to="." method="_on_drivers_amount_value_changed"]
+[connection signal="drag_ended" from="HBoxContainer/Section 1/Margin Container/VBoxContainer/Spawn Delay/HBoxContainer/Spawn Delay Time" to="." method="_on_spawn_delay_time_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/Section 1/Margin Container/VBoxContainer/Spawn Delay/HBoxContainer/Spawn Delay Time" to="." method="_on_spawn_delay_time_value_changed"]
+[connection signal="drag_ended" from="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Velocity/HBoxContainer/Base Velocity" to="." method="_on_base_velocity_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Velocity/HBoxContainer/Base Velocity" to="." method="_on_base_velocity_value_changed"]
+[connection signal="drag_ended" from="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Acceleration/HBoxContainer/Base Acceleration" to="." method="_on_base_acceleration_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Acceleration/HBoxContainer/Base Acceleration" to="." method="_on_base_acceleration_value_changed"]
+[connection signal="drag_ended" from="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Deacceleration/HBoxContainer/Base Deacceleration" to="." method="_on_base_deacceleration_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/Section 2/Margin Container/VBoxContainer/Base Deacceleration/HBoxContainer/Base Deacceleration" to="." method="_on_base_deacceleration_value_changed"]
+[connection signal="drag_ended" from="HBoxContainer/Section 2/Margin Container/VBoxContainer/Random Threshold/HBoxContainer/Random Threshold Factor" to="." method="_on_random_threshold_factor_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/Section 2/Margin Container/VBoxContainer/Random Threshold/HBoxContainer/Random Threshold Factor" to="." method="_on_random_threshold_factor_value_changed"]
+[connection signal="drag_ended" from="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Politeness Factor/HBoxContainer/Politeness Factor" to="." method="_on_politeness_factor_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Politeness Factor/HBoxContainer/Politeness Factor" to="." method="_on_politeness_factor_value_changed"]
+[connection signal="drag_ended" from="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Decision Threshold/HBoxContainer/Decision Threshold" to="." method="_on_decision_threshold_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Decision Threshold/HBoxContainer/Decision Threshold" to="." method="_on_decision_threshold_value_changed"]
+[connection signal="drag_ended" from="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Desired Gap/HBoxContainer/Desired Gap" to="." method="_on_desired_gap_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Desired Gap/HBoxContainer/Desired Gap" to="." method="_on_desired_gap_value_changed"]
+[connection signal="drag_ended" from="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Minimum Gap/HBoxContainer/Minimum Gap" to="." method="_on_minimum_gap_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/Section 4/ScrollContainer/Margin Container/VBoxContainer/Minimum Gap/HBoxContainer/Minimum Gap" to="." method="_on_minimum_gap_value_changed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
